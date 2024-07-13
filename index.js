@@ -8,7 +8,7 @@ const productRoutes = require("./routes/productRoutes");
 const path = require("path");
 
 const app = express()
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 dotenv.config();
 mongoose.connect(process.env.MONGO_URI)
@@ -20,8 +20,8 @@ app.listen(PORT,()=>{
     console.log(`Server Started and Running at ${PORT}`)
 })
 
-app.use('/home',(req,res)=>{
-    res.send("<h1>Welcome to MawaMandi</h1>");
+app.use('/',(req,res)=>{
+    res.send("<h1>Welcome to Ecommerce BackEnd API,</h1><p>Developed using Node.js and Express Framework </p>");
 })
 
 app.use(bodyParser.json())
