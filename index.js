@@ -20,12 +20,12 @@ app.listen(PORT,()=>{
     console.log(`Server Started and Running at ${PORT}`)
 })
 
-app.use('/',(req,res)=>{
-    res.send("<h1>Welcome to Ecommerce BackEnd API,</h1><p>Developed using Node.js and Express Framework </p>");
-})
-
 app.use(bodyParser.json())
 app.use('/vendor',vendorRoutes);
 app.use('/firm',firmRoutes);
 app.use('/product',productRoutes);
 app.use('/uploads',express.static('uploads'))
+
+app.use('/',(req,res)=>{
+    res.send("<h1>Welcome to Ecommerce BackEnd API,</h1><p>Developed using Node.js and Express Framework </p>");
+})
