@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema({
         }
     },
     image : {type:String},
-    bestSeller : {type:String},
+    bestSeller : {type:Boolean},
     description : {type:String},
     firm:[{ 
         // //Linking with Firm Table or Collection 

@@ -15,7 +15,7 @@ const vendorRegister =  async(req,res) => {
         {
             //console.log(vendorEmail); 
             console.log("User Already Exists");
-            return res.status(400).json("User Already Exist");
+            return res.status(400).json({error:"User Already Exist"});
           
         }
         const hashedpassword = await bcrypt.hash(password,10);
@@ -25,7 +25,7 @@ const vendorRegister =  async(req,res) => {
             password : hashedpassword
         });
         await newVendor.save();
-        return res.status(201).json("Vendor Registered Successfully");
+        return res.status(201).json({success:"Vendor Registered Successfully"});
         console.log("Registered");
     }catch(error){
         console.log(error);
@@ -49,9 +49,10 @@ const vendorLogin = async(req,res)=>{
         }
         const token = jwt.sign({vendorId:vendor._id},secretKey,{expiresIn :"1h"})
       
-    
+     
+       const vendorId = vendor._id;
        // console.log(email)
-        return res.status(200).json({success:"Login Successful",token});
+        return res.status(200).json({success:"Login Successful",token,vendorId});
     }
     catch(error){
         console.log(error);
@@ -83,7 +84,8 @@ const getVendorByID = async(req,res)=>{
         if(!vendor){
             return res.status(404).json({error : "Vendor Not Found"})
         }
-        res.status(200).json({vendor})
+        const vendorFirmById=vendor.firm[0]._id;
+        res.status(200).json({vendor,vendorFirmById})
     } catch (error) {
         return res.status(500).json({error : "Internal Server Error"})
     }

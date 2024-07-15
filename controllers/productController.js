@@ -1,6 +1,8 @@
 const Product = require('../models/Product')
 const Firm = require('../models/Firm')
 const multer=require('multer')
+const path=require('path');
+
 
 /*Image Code*/
 const storage = multer.diskStorage({
@@ -37,8 +39,8 @@ const addProduct = async(req,res)=>{
 
         await firm.save();
         
-        //return res.status(200).json({success:"Product Succesfully Added to Firm"});
-        return res.status(200).json(savedProduct);
+        return res.status(201).json({success:"Product Succesfully Added to Firm"});
+       // return res.status(200).json(savedProduct);
 
     } catch (error) {
         console.log(error)
